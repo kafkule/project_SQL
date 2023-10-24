@@ -1,5 +1,9 @@
 -- Datové sady, které je možné použít pro získání vhodného datového podkladu
 
+SHOW DATABASES;
+
+USE `engeto-2023-09`; -- název databáze obsahuje čísla, je nutné jej uzavřít do tzv. backticks (zpětný apostrof)
+
 -- Primární tabulky:
 
 SELECT *
