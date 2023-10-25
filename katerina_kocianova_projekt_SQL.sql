@@ -214,3 +214,27 @@ WHERE cpay.value_type_code = 5958 AND cpay2.value_type_code = 5958
 GROUP BY time_period
 ORDER BY time_period;
 
+
+-- 5) Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo násdujícím roce výraznějším růstem?
+
+SELECT
+	country,
+	year,
+	GDP
+FROM economies
+WHERE country = 'European Union'
+ORDER BY year;
+
+SELECT 
+	e.country,
+	e.year AS time_period,
+	e.GDP,
+	e2.year AS previous_time_period,
+	e2.GDP AS previous_GDP,
+	ROUND(((e.GDP - e2.GDP) / e2.GDP) * 100, 2) AS GDP_growth_percentage
+FROM economies AS e
+JOIN economies AS e2
+ON e.country = e2.country AND e.year = e2.year + 1
+WHERE e.country = 'European Union' AND e2.country = 'European Union'
+	AND e.GDP IS NOT NULL AND e2.GDP IS NOT NULL
+ORDER BY time_period;
