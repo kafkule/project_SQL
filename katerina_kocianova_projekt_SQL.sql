@@ -195,3 +195,22 @@ SELECT
 FROM v_avg_grocery_values AS agv
 JOIN v_avg_grocery_values_2 AS agv2
 ON agv.time_period = agv2.previous_time_period + 1;
+
+-- CREATE OR REPLACE VIEW v_avg_payroll_values_changes AS
+SELECT 
+    cpay.payroll_year AS time_period, 
+	cpay.value AS payroll_value,
+	cpay2.payroll_year AS previous_time_period,
+	cpay2.value AS previous_time_period_value,
+	ROUND(((cpay.value - cpay2.value) / cpay2.value) * 100, 2) AS payroll_value_growth_percentage
+FROM czechia_payroll AS cpay
+JOIN czechia_payroll AS cpay2 ON cpay.payroll_year = cpay2.payroll_year + 1
+	AND cpay.industry_branch_code = cpay2.industry_branch_code
+JOIN czechia_payroll_industry_branch AS ib ON cpay.industry_branch_code = ib.code
+WHERE cpay.value_type_code = 5958 AND cpay2.value_type_code = 5958
+	AND cpay.calculation_code = 200 AND cpay2.calculation_code = 200 
+	AND cpay.industry_branch_code IS NOT NULL -- průměrná hrubá mzda za plný úvazek v oboru
+	AND cpay.payroll_year BETWEEN '2006' AND '2018'
+GROUP BY time_period
+ORDER BY time_period;
+
