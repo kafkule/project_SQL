@@ -164,3 +164,34 @@ GROUP BY food_name, time_period
 ORDER BY food_name, time_period;
 
 
+-- 4) Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?
+
+-- CREATE OR REPLACE VIEW v_avg_grocery_values AS
+SELECT 
+    YEAR(cp.date_from) AS time_period, 
+	ROUND(AVG(cp.value),2) AS grocery_value
+FROM czechia_price AS cp
+JOIN czechia_price_category AS cpc 
+ON cp.category_code = cpc.code
+GROUP BY time_period
+ORDER BY time_period;
+
+-- CREATE OR REPLACE VIEW v_avg_grocery_values_2 AS
+SELECT 
+    YEAR(cp.date_from) AS previous_time_period, 
+	ROUND(AVG(cp.value),2) AS previous_time_period_grocery_value
+FROM czechia_price AS cp
+JOIN czechia_price_category AS cpc 
+ON cp.category_code = cpc.code
+GROUP BY previous_time_period
+ORDER BY previous_time_period;
+
+SELECT 
+	agv.time_period,
+	agv.grocery_value,
+	agv2.previous_time_period,
+	agv2.previous_time_period_grocery_value,
+	ROUND(((agv.grocery_value - agv2.previous_time_period_grocery_value) / agv2.previous_time_period_grocery_value) * 100, 2) AS grocery_value_growth_percentage
+FROM v_avg_grocery_values AS agv
+JOIN v_avg_grocery_values_2 AS agv2
+ON agv.time_period = agv2.previous_time_period + 1;
