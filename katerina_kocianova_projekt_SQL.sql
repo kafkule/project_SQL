@@ -56,7 +56,7 @@ Výzkumné otázky
 
 -- 1) Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
 
--- CREATE OR REPLACE VIEW payroll_values AS
+-- CREATE OR REPLACE VIEW v_payroll_values AS
 SELECT 
     ib.name AS industry,	
 	cpay.payroll_year AS time_period, 
@@ -79,7 +79,7 @@ ORDER BY industry, time_period;
 
 -- 2) Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
 
--- CREATE OR REPLACE VIEW food_values AS
+-- CREATE OR REPLACE VIEW v_food_values AS
 SELECT
     cpc.name AS food_name, 
     cp.value AS food_value,
@@ -95,15 +95,15 @@ SELECT *,
         WHEN payroll_value = 0 THEN NULL
         ELSE ROUND((payroll_value / food_value),0)
     END AS purchase
-FROM payroll_values AS pv
-JOIN food_values AS fv
+FROM v_payroll_values AS pv
+JOIN v_food_values AS fv
 ON pv.time_period = fv.time_period
 ORDER BY industry, pv.time_period;
 
 
 -- 3) Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší percentuální meziroční nárůst)?
 
--- CREATE OR REPLACE VIEW avg_food_values AS
+-- CREATE OR REPLACE VIEW v_avg_food_values AS
 SELECT 
     cpc.name AS food_name,	
 	YEAR(cp.date_from) AS time_period, 
@@ -114,23 +114,28 @@ ON cp.category_code = cpc.code
 GROUP BY food_name, time_period
 ORDER BY food_name, time_period;
 
--- CREATE OR REPLACE VIEW avg_food_values_2 AS
+-- CREATE OR REPLACE VIEW v_avg_food_values_2 AS
 SELECT 
     cpc.name AS food_name,	
-	YEAR(cp.date_from) AS time_period, 
-	ROUND(AVG(cp.value),2) AS food_value
+	YEAR(cp.date_from) AS previous_time_period, 
+	ROUND(AVG(cp.value),2) AS previous_time_period_food_value
 FROM czechia_price AS cp
 JOIN czechia_price_category AS cpc 
 ON cp.category_code = cpc.code
-GROUP BY food_name, time_period
-ORDER BY food_name, time_period;
+GROUP BY food_name, previous_time_period
+ORDER BY food_name, previous_time_period;
 
+SELECT 
+	afv.food_name,
+	afv.time_period,
+	afv.food_value,
+	afv2.previous_time_period,
+	afv2.previous_time_period_food_value,
+	ROUND(((afv.food_value - afv2.previous_time_period_food_value) / afv2.previous_time_period_food_value) * 100, 2) AS food_value_growth_percentage
+FROM v_avg_food_values AS afv
+JOIN v_avg_food_values_2 AS afv2
+ON afv.food_name = afv2.food_name AND afv.time_period = afv2.previous_time_period + 1;
 
-SELECT *,
-	ROUND(((afv.food_value - afv2.food_value) / afv2.food_value) * 100, 2) AS food_value_growth_percentage
-FROM avg_food_values AS afv
-JOIN avg_food_values_2 AS afv2
-ON afv.food_name = afv2.food_name AND afv.time_period = afv2.time_period - 1;
 
 SELECT 
     cpc.name AS food_name,	
@@ -140,7 +145,7 @@ SELECT
 	cp2.value AS previous_time_period_food_value,
 	ROUND(((cp.value - cp2.value) / cp2.value) * 100, 2) AS food_value_growth_percentage
 FROM czechia_price AS cp
-JOIN czechia_price AS cp2 ON YEAR(cp.date_from) = YEAR(cp2.date_from) + 1
+JOIN czechia_price AS cp2 ON YEAR(cp.date_from)= YEAR(cp2.date_from) + 1
 	AND cp.category_code = cp2.category_code
 JOIN czechia_price_category AS cpc ON cp.category_code = cpc.code
 GROUP BY food_name, time_period
