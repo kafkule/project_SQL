@@ -56,7 +56,7 @@ Výzkumné otázky
 
 -- 1) Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
 
--- CREATE OR REPLACE VIEW v_payroll_values AS
+-- CREATE OR REPLACE VIEW v_payroll_values_changes AS
 SELECT 
     ib.name AS industry,	
 	cpay.payroll_year AS time_period, 
@@ -95,7 +95,7 @@ SELECT *,
         WHEN payroll_value = 0 THEN NULL
         ELSE ROUND((payroll_value / food_value),0)
     END AS purchase
-FROM v_payroll_values AS pv
+FROM v_payroll_values_changes AS pv
 JOIN v_food_values AS fv
 ON pv.time_period = fv.time_period
 ORDER BY industry, pv.time_period;
@@ -125,6 +125,7 @@ ON cp.category_code = cpc.code
 GROUP BY food_name, previous_time_period
 ORDER BY food_name, previous_time_period;
 
+-- CREATE OR REPLACE VIEW v_food_values_changes AS
 SELECT 
 	afv.food_name,
 	afv.time_period,
@@ -135,6 +136,17 @@ SELECT
 FROM v_avg_food_values AS afv
 JOIN v_avg_food_values_2 AS afv2
 ON afv.food_name = afv2.food_name AND afv.time_period = afv2.previous_time_period + 1;
+
+-- CREATE OR REPLACE VIEW v_food_values_changes_rank AS
+SELECT 
+	afv.food_name,
+	ROUND(AVG(((afv.food_value - afv2.previous_time_period_food_value) / afv2.previous_time_period_food_value) * 100), 2) AS avg_food_value_growth_percentage
+FROM v_avg_food_values AS afv
+JOIN v_avg_food_values_2 AS afv2
+ON afv.food_name = afv2.food_name AND afv.time_period = afv2.previous_time_period + 1
+GROUP BY afv.food_name
+ORDER BY avg_food_value_growth_percentage;
+
 
 
 SELECT 
