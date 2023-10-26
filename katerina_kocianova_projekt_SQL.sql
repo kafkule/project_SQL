@@ -53,6 +53,50 @@ B) Zodpovědět výzkumné otázky:
 	5) Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo násdujícím roce výraznějším růstem?
 */
 
+-- VÝSTUP PROJEKTU - TABULKY
+
+SELECT *
+FROM czechia_payroll AS cpay
+JOIN czechia_payroll_industry_branch AS ib ON cpay.industry_branch_code = ib.code
+JOIN czechia_payroll_calculation AS cpc ON cpay.calculation_code = cpc.code
+JOIN czechia_payroll_unit AS cpu ON cpay.unit_code = cpu.code
+JOIN czechia_payroll_value_type AS cpvt ON cpay.value_type_code = cpvt.code
+JOIN czechia_price AS cp ON cpay.payroll_year = YEAR(cp.date_from)
+RIGHT JOIN czechia_price_category AS cpcat ON cp.category_code = cpcat.code
+WHERE cpay.value_type_code = 5958
+	AND cpay.calculation_code = 200 
+	AND cpay.industry_branch_code IS NOT NULL
+	AND cpcat.code IN (111301, 114201);
+
+
+CREATE TABLE `t_Katerina_Kocianova_project_SQL_secondary_final` AS
+SELECT 
+	c.country,
+	c.capital_city,
+	c.currency_name,
+	c.government_type,
+	c.surface_area,
+	c.yearly_average_temperature,
+	c.continent,
+	c.region_in_world,
+	e.year,
+	e.GDP,
+	e.gini,
+	e.population,
+	e.taxes,
+	e.fertility,
+	e.mortaliy_under5,
+	c.avg_height,
+	c.life_expectancy,
+	c.median_age_2018
+FROM countries AS c
+JOIN economies AS e 
+ON c.country = e.country
+WHERE continent = 'Europe'
+ORDER BY c.country, e.year;
+
+
+
 -- VÝZKUMNÉ OTÁZKY
 
 -- 1) Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
