@@ -114,54 +114,19 @@ ORDER BY c.country, e.year;
 
 -- CREATE OR REPLACE VIEW v_payroll_values_changes AS
 SELECT 
-    ib.name AS industry,	
-	cpay.payroll_year AS time_period, 
-	cpay.value AS payroll_value,
-	cpay2.payroll_year AS previous_time_period,
-	cpay2.value AS previous_time_period_value,
-	ROUND(((cpay.value - cpay2.value) / cpay2.value) * 100, 2) AS value_growth_percentage
-FROM czechia_payroll AS cpay
-JOIN czechia_payroll AS cpay2 ON cpay.payroll_year = cpay2.payroll_year + 1
-	AND cpay.industry_branch_code = cpay2.industry_branch_code
-JOIN czechia_payroll_industry_branch AS ib ON cpay.industry_branch_code = ib.code
-WHERE cpay.value_type_code = 5958 AND cpay2.value_type_code = 5958
-	AND cpay.calculation_code = 200 AND cpay2.calculation_code = 200 
-	AND cpay.industry_branch_code IS NOT NULL -- průměrná hrubá mzda za plný úvazek v oboru
-	AND cpay.payroll_year BETWEEN '2006' AND '2018'
-GROUP BY industry, time_period
-ORDER BY industry, time_period;
-
-SELECT 
-    kkp.industry,	
+    kkp.industry AS industry,	
 	kkp.payroll_value_year AS 'year', 
 	kkp.avg_payroll_value,
 	kkp2.payroll_value_year AS previous_year, 
-	kkp2.avg_payroll_value,
+	kkp2.avg_payroll_value AS previous_avg_payroll_value,
 	ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) AS payroll_value_growth_percentage
 FROM t_katerina_kocianova_project_SQL_primary_final AS kkp
 JOIN t_katerina_kocianova_project_SQL_primary_final AS kkp2
 ON kkp.payroll_value_year = kkp2.payroll_value_year + 1
 	AND kkp.industry_branch_code = kkp2.industry_branch_code
-;
+GROUP BY industry, 'year', previous_year
+ORDER BY industry, 'year', previous_year;
 
-
-SELECT 
-    ib.name AS industry,	
-	cpay.payroll_year AS time_period, 
-	cpay.value AS payroll_value,
-	cpay2.payroll_year AS previous_time_period,
-	cpay2.value AS previous_time_period_value,
-	ROUND(((cpay.value - cpay2.value) / cpay2.value) * 100, 2) AS value_growth_percentage
-FROM czechia_payroll AS cpay
-JOIN czechia_payroll AS cpay2 ON cpay.payroll_year = cpay2.payroll_year + 1
-	AND cpay.industry_branch_code = cpay2.industry_branch_code
-JOIN czechia_payroll_industry_branch AS ib ON cpay.industry_branch_code = ib.code
-WHERE cpay.value_type_code = 5958 AND cpay2.value_type_code = 5958
-	AND cpay.calculation_code = 200 AND cpay2.calculation_code = 200 
-	AND cpay.industry_branch_code IS NOT NULL -- průměrná hrubá mzda za plný úvazek v oboru
-	AND cpay.payroll_year BETWEEN '2006' AND '2018'
-GROUP BY industry, time_period
-ORDER BY industry, time_period;
 
 -- 2) Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
 
