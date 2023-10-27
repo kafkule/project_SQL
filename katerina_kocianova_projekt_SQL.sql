@@ -114,7 +114,7 @@ ORDER BY c.country, e.year;
 
 -- CREATE OR REPLACE VIEW v_payroll_values_changes AS
 SELECT 
-    kkp.industry AS industry,	
+	kkp.industry AS industry,	
 	kkp.payroll_value_year AS 'year', 
 	kkp.avg_payroll_value,
 	kkp2.payroll_value_year AS previous_year, 
