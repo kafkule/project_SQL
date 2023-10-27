@@ -1,4 +1,5 @@
 ENGETO Projekt z SQL: Data o mzdách a cenách potravin 
+
 Autor: Kateřina Kocianová
 -----
 
@@ -37,7 +38,11 @@ V tabulce jsou zobrazeny sloupce odvětví a jejich kód, hodnoty mezd a ceny po
 
 ## Secondary Table
 
-t_katerina_kocianova_project_SQL_secondaryb_final
+Druhá tabulka _t_katerina_kocianova_project_SQL_secondary_final_ propojuje tabulky _countries_ s informacemi o zemích světa a _economies_, která obsahuje data k HDP, daním apod.
+
+V tabulce jsou zobrazeny základní informace o evropských státech, seřazené dle názvu dané země a let, za které jsou evidované konkrétní data.
+
+
 
 # Ansers to questions
 
