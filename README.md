@@ -47,6 +47,11 @@ V tabulce jsou zobrazeny základní informace o evropských státech, seřazené
 
 ## Q1: Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
 
+Pohled _v_payroll_values_changes_ ukazuje celkový pohled na odvětví a změny mezd v průběhu let 2006 - 2018.
+Pohled _v_payroll_rising_values_ říká, u kterých odvětví docházelo v určitých letech k nárůstů, naopak pohled _v_payroll_falling_values_ zobrazuje odvětví, kde mzdy v některých letech klesaly. 
+
+Z pohledu _v_payroll_falling_values_ také vyplývá, že v odvětvích _Doprava a skladování_, Ostatní činnosti_, _Zdravotní a sociální péče_ a _Zpracovatelský průmysl_ mzdy v období 2006 - 2018 neklesaly, ale pouze rostly.
+
 
 ## Q2: Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
 
