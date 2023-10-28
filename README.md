@@ -1,5 +1,4 @@
 ENGETO Projekt z SQL: Data o mzdách a cenách potravin 
-
 Autor: Kateřina Kocianová
 -----
 
@@ -44,14 +43,18 @@ V tabulce jsou zobrazeny základní informace o evropských státech, seřazené
 
 
 
-# Ansers to questions
+# Answers to questions
 
-## Question 1
-Lorem ipsum dolor sit amet. This is someting.
+## Q1: Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
 
-## Question 2
-Lorem ipsum dolor sit amet. This is someting.
 
-## Question 3
-Lorem ipsum dolor sit amet. This is someting.
+## Q2: Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
 
+
+## Q3: Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší percentuální meziroční nárůst)?
+
+
+## Q4: Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?
+
+
+## Q5: Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo následujícím roce výraznějším růstem?
