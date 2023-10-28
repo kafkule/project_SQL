@@ -63,6 +63,10 @@ Pohled _v_avg_purchase_ ukazuje, kolik litrů mléka a kolik kilogramů chleba j
 
 ### Q3: Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší percentuální meziroční nárůst)?
 
+Pohled _v_food_values_changes_ zobrazuje změny cen jednotlivých potravin v letech 2006 - 2018.
+
+V rámci pohledu _v_food_values_changes_rank_ můžeme vidět, která kategorie potravin zdražuje nejpomaleji. Cukr a rajčata v daném období nezdražily vůbec, naopak zlevnily. Nejpomaleji pak rostou ceny banánů, vepřové pečeně, přírodní minerální vody, šunkového salámu a jablek (pořadí prvních 5 nejpomaleji zdražujících potravin).
+
 
 ### Q4: Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?
 

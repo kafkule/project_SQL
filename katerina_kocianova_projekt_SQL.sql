@@ -223,65 +223,37 @@ ORDER BY food_name, payroll_value_year;
 
 -- 3) Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší percentuální meziroční nárůst)?
 
--- CREATE OR REPLACE VIEW v_avg_food_values AS
-SELECT 
-    cpc.name AS food_name,	
-	YEAR(cp.date_from) AS time_period, 
-	ROUND(AVG(cp.value),2) AS food_value
-FROM czechia_price AS cp
-JOIN czechia_price_category AS cpc 
-ON cp.category_code = cpc.code
-GROUP BY food_name, time_period
-ORDER BY food_name, time_period;
-
--- CREATE OR REPLACE VIEW v_avg_food_values_2 AS
-SELECT 
-    cpc.name AS food_name,	
-	YEAR(cp.date_from) AS previous_time_period, 
-	ROUND(AVG(cp.value),2) AS previous_time_period_food_value
-FROM czechia_price AS cp
-JOIN czechia_price_category AS cpc 
-ON cp.category_code = cpc.code
-GROUP BY food_name, previous_time_period
-ORDER BY food_name, previous_time_period;
+SELECT *
+FROM v_food_values_changes;
 
 -- CREATE OR REPLACE VIEW v_food_values_changes AS
 SELECT 
-	afv.food_name,
-	afv.time_period,
-	afv.food_value,
-	afv2.previous_time_period,
-	afv2.previous_time_period_food_value,
-	ROUND(((afv.food_value - afv2.previous_time_period_food_value) / afv2.previous_time_period_food_value) * 100, 2) AS food_value_growth_percentage
-FROM v_avg_food_values AS afv
-JOIN v_avg_food_values_2 AS afv2
-ON afv.food_name = afv2.food_name AND afv.time_period = afv2.previous_time_period + 1;
+	kkp.food_name AS food,
+	kkp.food_value_year AS 'year',
+	kkp.avg_food_value AS value,
+	kkp2.food_value_year AS previous_year,
+	kkp2.avg_food_value AS previous_value,
+	ROUND(((kkp.avg_food_value - kkp2.avg_food_value) / kkp2.avg_food_value) * 100, 2) AS food_value_growth_percentage
+FROM t_katerina_kocianova_project_SQL_primary_final AS kkp
+JOIN t_katerina_kocianova_project_SQL_primary_final AS kkp2
+ON kkp.food_name = kkp2.food_name AND kkp.food_value_year = kkp2.food_value_year + 1
+GROUP BY food, 'year', previous_year
+ORDER BY food, 'year', previous_year;
+
 
 -- CREATE OR REPLACE VIEW v_food_values_changes_rank AS
 SELECT 
-	afv.food_name,
-	ROUND(AVG(((afv.food_value - afv2.previous_time_period_food_value) / afv2.previous_time_period_food_value) * 100), 2) AS avg_food_value_growth_percentage
-FROM v_avg_food_values AS afv
-JOIN v_avg_food_values_2 AS afv2
-ON afv.food_name = afv2.food_name AND afv.time_period = afv2.previous_time_period + 1
-GROUP BY afv.food_name
-ORDER BY avg_food_value_growth_percentage;
+	kkp.food_name,
+	ROUND(AVG(((kkp.avg_food_value - kkp2.avg_food_value) / kkp2.avg_food_value) * 100), 2) AS avg_food_value_growth_percentage
+FROM t_katerina_kocianova_project_SQL_primary_final AS kkp
+JOIN t_katerina_kocianova_project_SQL_primary_final AS kkp2
+ON kkp.food_name = kkp2.food_name AND kkp.food_value_year = kkp2.food_value_year + 1
+GROUP BY kkp.food_name
+ORDER BY avg_food_value_growth_percentage
+LIMIT 7;
 
-
-
-SELECT 
-    cpc.name AS food_name,	
-	YEAR(cp.date_from) AS time_period, 
-	cp.value AS food_value,
-	YEAR(cp2.date_from) AS previous_time_period,
-	cp2.value AS previous_time_period_food_value,
-	ROUND(((cp.value - cp2.value) / cp2.value) * 100, 2) AS food_value_growth_percentage
-FROM czechia_price AS cp
-JOIN czechia_price AS cp2 ON YEAR(cp.date_from)= YEAR(cp2.date_from) + 1
-	AND cp.category_code = cp2.category_code
-JOIN czechia_price_category AS cpc ON cp.category_code = cpc.code
-GROUP BY food_name, time_period
-ORDER BY food_name, time_period;
+SELECT *
+FROM v_food_values_changes_rank;
 
 
 -- 4) Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?
