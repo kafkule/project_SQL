@@ -57,6 +57,8 @@ Z pohledu _v_payroll_falling_values_ také vyplývá, že v odvětvích _Doprava
 ### Q2: Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
 
 
+
+
 ### Q3: Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší percentuální meziroční nárůst)?
 
 

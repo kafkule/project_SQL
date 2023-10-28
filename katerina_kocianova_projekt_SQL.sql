@@ -188,27 +188,31 @@ ORDER BY industry, 'year', previous_year;
 
 -- 2) Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
 
--- CREATE OR REPLACE VIEW v_food_values AS
+-- CREATE OR REPLACE VIEW v_purchase AS
 SELECT
-    cpc.name AS food_name, 
-    cp.value AS food_value,
-    YEAR (cp.date_from) AS time_period
-FROM czechia_price AS cp
-JOIN czechia_price_category AS cpc ON cp.category_code = cpc.code
-WHERE cpc.code IN (111301, 114201)
-GROUP BY time_period, food_name;
+	industry,
+	avg_payroll_value AS payroll_value,
+	payroll_value_year AS 'year',
+	avg_food_value AS food_value,
+	food_name,
+	CASE
+        WHEN avg_payroll_value = 0 THEN NULL
+        ELSE ROUND((avg_payroll_value / avg_food_value), 0)
+    END AS purchase
+FROM t_katerina_kocianova_project_SQL_primary_final AS kkp
+WHERE (food_name = 'Chléb konzumní kmínový' OR food_name = 'Mléko polotučné pasterované')
+	AND (payroll_value_year = 2006 OR payroll_value_year = 2018)
+ORDER BY industry, payroll_value_year;
 
 
 SELECT *,
 	CASE
-        WHEN payroll_value = 0 THEN NULL
-        ELSE ROUND((payroll_value / food_value),0)
+        WHEN avg_payroll_value = 0 THEN NULL
+        ELSE ROUND((avg_payroll_value / avg_food_value),0)
     END AS purchase
-FROM v_payroll_values_changes AS pv
-JOIN v_food_values AS fv
-ON pv.time_period = fv.time_period
-ORDER BY industry, pv.time_period;
-
+FROM t_katerina_kocianova_project_SQL_primary_final AS kkp
+WHERE food_name = 'Pivo výčepní, světlé, lahvové'
+ORDER BY industry, payroll_value_year;
 
 -- 3) Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší percentuální meziroční nárůst)?
 
