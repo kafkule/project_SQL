@@ -56,7 +56,9 @@ Z pohledu _v_payroll_falling_values_ také vyplývá, že v odvětvích _Doprava
 
 ### Q2: Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
 
+Pohled _v_purchase_ zobrazuje, kolik litrů mléka a kolik kilogramů chleba je možné si koupit v letech 2006 a 2018 dle mzdy v různých odvětvích.
 
+Pohled _v_avg_purchase_ ukazuje, kolik litrů mléka a kolik kilogramů chleba je možné si koupit v letech 2006 a 2018 za průměrnou mzdu za všechny odvětví.
 
 
 ### Q3: Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší percentuální meziroční nárůst)?
