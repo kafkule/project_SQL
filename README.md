@@ -8,8 +8,9 @@
 ## Struktura projektu
 
 - dokumentace
-- výzkumné otázky
 - tabulky
+- výzkumné otázky
+
 
 
 
@@ -23,8 +24,9 @@ Tento projekt se zaměřuje na analýzu růstu mezd v různých odvětvích a ce
 
 Po přečtení zadání projektu jsem si vůbec nevěděla rady, ukázalo se ale, že hledám příliš složité řešení, místo abych se zaměřila hlavně na to, co už znám.
 
-V rámci zpracování dat jsem bojovala zejména s dlouhým časem načítání některých tabulek, občas bohužel způsobeným technickými problémy a použitím DBeaveru na MacOS.
+V rámci zpracování dat jsem bojovala zejména s dlouhým časem načítáním některých tabulek, občas bohužel způsobeným technickými problémy a použitím DBeaveru na MacOS.
 
+Pro usnadnění práce jsem obě své tabulky uložila do databáze _data_academy_2023_09_26_. Zároveň jsem se snažila pro každou tabulku vytvořit views, v některých případech jsem pak tyto pohledy použila pro tvorbu dotazů pro zodpovězení dalších otázek.
 
 
 ## Popis dat
@@ -72,6 +74,8 @@ V rámci pohledu _v_food_values_changes_rank_ můžeme vidět, která kategorie 
 
 Srovnání meziročního růstu mezd a cen potravin ukazuje pohled _v_payroll_price_growth_comparsion_. Z něj plyne, že v žádném roce nedošlo k nárůstů mezd ani cen potravin o více než 10 %. Jediný rok, který se 10 % blíží, je v případě cen potravin změna cen mezi roky 2016 a 2017 průměrně o 9,63 %.
 
+Pro jistotu přidávám ještě pohled _v_payroll_price_growth_comparsion2_, který zohledňuje přímo rozdíl mezi procentem navýšením ceny potravin a mezd. Ani zde není nikde hodnota vyšší než 10 %.
+
 
 ### Q5: Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo následujícím roce výraznějším růstem?
 
@@ -82,7 +86,7 @@ Vliv HDP na mzdy a ceny potravin ukazuje pohled _v_GDP_payroll_price_growth_comp
 - v roce 2011 rostlo HDP, cena potravin i mzdy, z toho můžeme usuzovat, že ekonomika byla již v lepší kondici, např. se zvyšovala celková produkce zboží a služeb, zvyšovala se poptávka po pracovní síle
 - mezi lety 2011 - 2012 a 2016 - 2017 klesalo HDP, a přesto rostly mzdy i ceny potravin, s největší pravděpodobností je důsledkem růstu mezd a cen potravin pravděpodobně zvyšující se inflace
 
-Pro lepší představu jsem vytvořila také graf závislosti výše HDP na výši mezd a cen potravin v meziročním srovnání.
+Pro lepší představu jsem vytvořila také graf závislosti výše HDP na výši mezd a cen potravin v meziročním srovnání. Je však třeba říct, že v ekonomice se vyznám velice málo, a tak jsem vliv HDP na výši mezd nebo cenu potravin konzultovala s AI :)
 
 
 ![Graf HDP](https://github.com/kafkule/project_SQL/assets/68855214/ce54a2d1-87ac-4d9d-8563-6ac03d8dce6e)

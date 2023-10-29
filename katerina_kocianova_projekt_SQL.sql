@@ -42,6 +42,7 @@ SELECT *
 FROM economies; -- HDP, GINI, daňová zátěž, atd. pro daný stát a rok.
 
 
+
 /* 
 Úkoly:
 A) Vytvořit tabulky t_katerina_kocianova_project_SQL_primary_final a t_katerina_kocianova_project_SQL_secondary_final
@@ -52,6 +53,7 @@ B) Zodpovědět výzkumné otázky:
 	4) Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?
 	5) Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo násdujícím roce výraznějším růstem?
 */
+
 
 
 -- VÝSTUP PROJEKTU - TABULKY
@@ -273,7 +275,8 @@ SELECT
 	ROUND(AVG(kkp2.avg_payroll_value),2) AS previous_payroll_value,
 	ROUND(AVG(kkp2.avg_food_value),2) AS previous_food_value,
 	ROUND(((AVG(kkp.avg_payroll_value) - AVG(kkp2.avg_payroll_value)) / AVG(kkp2.avg_payroll_value)) * 100, 2) AS payroll_value_growth_percentage,
-	ROUND(((AVG(kkp.avg_food_value) - AVG(kkp2.avg_food_value)) / AVG(kkp2.avg_food_value)) * 100, 2) AS food_value_growth_percentage
+	ROUND(((AVG(kkp.avg_food_value) - AVG(kkp2.avg_food_value)) / AVG(kkp2.avg_food_value)) * 100, 2) AS food_value_growth_percentage,
+	ROUND(((AVG(kkp.avg_food_value) - AVG(kkp2.avg_food_value)) / AVG(kkp2.avg_food_value)) * 100, 2) - ROUND(((AVG(kkp.avg_payroll_value) - AVG(kkp2.avg_payroll_value)) / AVG(kkp2.avg_payroll_value)) * 100, 2) AS food_payroll_value_difference
 FROM t_katerina_kocianova_project_SQL_primary_final AS kkp
 JOIN t_katerina_kocianova_project_SQL_primary_final AS kkp2
 ON kkp.payroll_value_year = kkp2.payroll_value_year + 1
