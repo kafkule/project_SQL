@@ -74,3 +74,12 @@ Srovnání meziročního růstu mezd a cen potravin ukazuje pohled _v_payroll_pr
 
 
 ### Q5: Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo následujícím roce výraznějším růstem?
+
+Vliv HDP na mzdy a ceny potravin ukazuje pohled _v_GDP_payroll_price_growth_comparsion_. Z něj lze vyčíst, že:
+
+- v roce 2008 klesalo HDP, klesala také cena potravin, a přesto stoupala mzda, to může znamenat, že v tomto roce došlo k výraznému zvýšení produktivity práce např. vyšším využitím technologií, lepším řízením, efektivnějším výrobním procesem nebo jinými faktory, které umožnily zaměstnavatelům platit zaměstnancům více za jejich práci, ale může to i naznačovat, že ČNB očekávala pokles inflace, a zaměstnavatelé tak mohli reagovat na tuto situaci zvyšováním mezd, aby si udrželi zaměstnance
+- v letech 2009, 2012 a 2013 klesalo HDP, ceny potravin i mzdy, to naznačuje období ekonomické krize země a tedy období, kdy se zavedla opatření k obnovení ekonomické stability
+- v roce 2011 rostlo HDP, cena potravin i mzdy, z toho můžeme usuzovat, že ekonomika byla již v lepší kondici, např. se zvyšovala celková produkce zboží a služeb, zvyšovala se poptávka po pracovní síle
+- mezi lety 2011 - 2012 a 2016 - 2017 klesalo HDP a rostly mzdy i ceny potravin
+
+![Graf: Vliv HDP na mzdy a ceny potravin](/Users/kafkule/Downloads/HDP.png)
