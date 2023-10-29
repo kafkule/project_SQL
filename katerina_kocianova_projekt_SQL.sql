@@ -118,13 +118,16 @@ ORDER BY c.country, e.year;
 
 -- 1) Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
 
+SELECT *
+FROM v_payroll_values_changes;
+
 -- CREATE OR REPLACE VIEW v_payroll_values_changes AS
 SELECT 
 	kkp.industry AS industry,	
 	kkp.payroll_value_year AS 'year', 
-	kkp.avg_payroll_value,
+	kkp.avg_payroll_value AS payroll_value,
 	kkp2.payroll_value_year AS previous_year, 
-	kkp2.avg_payroll_value AS previous_avg_payroll_value,
+	kkp2.avg_payroll_value AS previous_payroll_value,
 	ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) AS payroll_value_growth_percentage,
 	CASE
         WHEN ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) < 0 THEN 'falling'
@@ -143,7 +146,7 @@ SELECT
 	kkp.payroll_value_year AS 'year', 
 	kkp.avg_payroll_value,
 	kkp2.payroll_value_year AS previous_year, 
-	kkp2.avg_payroll_value AS previous_avg_payroll_value,
+	kkp2.avg_payroll_value AS previous_payroll_value,
 	ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) AS payroll_value_growth_percentage,
 	CASE
         WHEN ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) < 0 THEN 'falling'
@@ -165,9 +168,9 @@ ORDER BY industry, 'year', previous_year;
 SELECT 
 	kkp.industry AS industry,	
 	kkp.payroll_value_year AS 'year', 
-	kkp.avg_payroll_value,
+	kkp.avg_payroll_value AS payroll_value,
 	kkp2.payroll_value_year AS previous_year, 
-	kkp2.avg_payroll_value AS previous_avg_payroll_value,
+	kkp2.avg_payroll_value AS previous_payroll_value,
 	ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) AS payroll_value_growth_percentage,
 	CASE
         WHEN ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) < 0 THEN 'falling'
@@ -258,53 +261,27 @@ FROM v_food_values_changes_rank;
 
 -- 4) Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?
 
--- CREATE OR REPLACE VIEW v_avg_grocery_values AS
-SELECT 
-    YEAR(cp.date_from) AS time_period, 
-	ROUND(AVG(cp.value),2) AS grocery_value
-FROM czechia_price AS cp
-JOIN czechia_price_category AS cpc 
-ON cp.category_code = cpc.code
-GROUP BY time_period
-ORDER BY time_period;
+SELECT *
+FROM v_payroll_price_growth_comparsion;
 
--- CREATE OR REPLACE VIEW v_avg_grocery_values_2 AS
+-- CREATE OR REPLACE VIEW v_payroll_price_growth_comparsion AS
 SELECT 
-    YEAR(cp.date_from) AS previous_time_period, 
-	ROUND(AVG(cp.value),2) AS previous_time_period_grocery_value
-FROM czechia_price AS cp
-JOIN czechia_price_category AS cpc 
-ON cp.category_code = cpc.code
-GROUP BY previous_time_period
-ORDER BY previous_time_period;
-
-SELECT 
-	agv.time_period,
-	agv.grocery_value,
-	agv2.previous_time_period,
-	agv2.previous_time_period_grocery_value,
-	ROUND(((agv.grocery_value - agv2.previous_time_period_grocery_value) / agv2.previous_time_period_grocery_value) * 100, 2) AS grocery_value_growth_percentage
-FROM v_avg_grocery_values AS agv
-JOIN v_avg_grocery_values_2 AS agv2
-ON agv.time_period = agv2.previous_time_period + 1;
-
--- CREATE OR REPLACE VIEW v_avg_payroll_values_changes AS
-SELECT 
-    cpay.payroll_year AS time_period, 
-	cpay.value AS payroll_value,
-	cpay2.payroll_year AS previous_time_period,
-	cpay2.value AS previous_time_period_value,
-	ROUND(((cpay.value - cpay2.value) / cpay2.value) * 100, 2) AS payroll_value_growth_percentage
-FROM czechia_payroll AS cpay
-JOIN czechia_payroll AS cpay2 ON cpay.payroll_year = cpay2.payroll_year + 1
-	AND cpay.industry_branch_code = cpay2.industry_branch_code
-JOIN czechia_payroll_industry_branch AS ib ON cpay.industry_branch_code = ib.code
-WHERE cpay.value_type_code = 5958 AND cpay2.value_type_code = 5958
-	AND cpay.calculation_code = 200 AND cpay2.calculation_code = 200 
-	AND cpay.industry_branch_code IS NOT NULL -- průměrná hrubá mzda za plný úvazek v oboru
-	AND cpay.payroll_year BETWEEN '2006' AND '2018'
-GROUP BY time_period
-ORDER BY time_period;
+	kkp.payroll_value_year AS 'year', 
+	ROUND(AVG(kkp.avg_payroll_value),2) AS payroll_value,
+	ROUND(AVG(kkp.avg_food_value),2) AS food_value,
+	kkp2.payroll_value_year AS previous_year, 
+	ROUND(AVG(kkp2.avg_payroll_value),2) AS previous_payroll_value,
+	ROUND(AVG(kkp2.avg_food_value),2) AS previous_food_value,
+	ROUND(((AVG(kkp.avg_payroll_value) - AVG(kkp2.avg_payroll_value)) / AVG(kkp2.avg_payroll_value)) * 100, 2) AS payroll_value_growth_percentage,
+	ROUND(((AVG(kkp.avg_food_value) - AVG(kkp2.avg_food_value)) / AVG(kkp2.avg_food_value)) * 100, 2) AS food_value_growth_percentage
+FROM t_katerina_kocianova_project_SQL_primary_final AS kkp
+JOIN t_katerina_kocianova_project_SQL_primary_final AS kkp2
+ON kkp.payroll_value_year = kkp2.payroll_value_year + 1
+	AND kkp.industry_branch_code = kkp2.industry_branch_code
+	AND kkp.food_name = kkp2.food_name 
+	AND kkp.food_value_year = kkp2.food_value_year + 1
+GROUP BY 'year', previous_year
+ORDER BY 'year', previous_year;
 
 
 -- 5) Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo násdujícím roce výraznějším růstem?

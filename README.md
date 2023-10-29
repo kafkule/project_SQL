@@ -70,5 +70,7 @@ V rámci pohledu _v_food_values_changes_rank_ můžeme vidět, která kategorie 
 
 ### Q4: Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?
 
+Srovnání meziročního růstu mezd a cen potravin ukazuje pohled _v_payroll_price_growth_comparsion_. Z něj plyne, že v žádném roce nedošlo k nárůstů mezd ani cen potravin o více než 10 %. Jediný rok, který se 10 % blíží, je v případě cen potravin změna cen mezi roky 2016 a 2017 průměrně o 9,63 %.
+
 
 ### Q5: Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo následujícím roce výraznějším růstem?
