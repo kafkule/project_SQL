@@ -232,10 +232,10 @@ FROM v_food_values_changes;
 -- CREATE OR REPLACE VIEW v_food_values_changes AS
 SELECT 
 	kkp.food_name AS food,
-	kkp.food_value_year AS 'year',
 	kkp.avg_food_value AS value,
 	kkp2.food_value_year AS previous_year,
 	kkp2.avg_food_value AS previous_value,
+	kkp.food_value_year AS 'year',
 	ROUND(((kkp.avg_food_value - kkp2.avg_food_value) / kkp2.avg_food_value) * 100, 2) AS food_value_growth_percentage
 FROM t_katerina_kocianova_project_SQL_primary_final AS kkp
 JOIN t_katerina_kocianova_project_SQL_primary_final AS kkp2
