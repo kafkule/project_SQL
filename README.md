@@ -82,4 +82,4 @@ Vliv HDP na mzdy a ceny potravin ukazuje pohled _v_GDP_payroll_price_growth_comp
 - v roce 2011 rostlo HDP, cena potravin i mzdy, z toho můžeme usuzovat, že ekonomika byla již v lepší kondici, např. se zvyšovala celková produkce zboží a služeb, zvyšovala se poptávka po pracovní síle
 - mezi lety 2011 - 2012 a 2016 - 2017 klesalo HDP a rostly mzdy i ceny potravin
 
-![Graf: Vliv HDP na mzdy a ceny potravin](https://github.com/kafkule/project_SQL/blob/main/HDP.png)
+![Graf HDP](https://github.com/kafkule/project_SQL/assets/68855214/ce54a2d1-87ac-4d9d-8563-6ac03d8dce6e)
