@@ -11,10 +11,10 @@ FROM v_GDP_payroll_price_growth_comparsion;
 CREATE OR REPLACE VIEW v_GDP_CZ_changes AS
 SELECT 
 	e.country,
-	e.year AS GDP_year,
-	e.GDP AS GDP,
 	e2.year AS previous_GDP_year,
 	e2.GDP AS previous_GDP,
+	e.year AS GDP_year,
+	e.GDP AS GDP,
 	ROUND(((e.GDP - e2.GDP) / e2.GDP) * 100, 2) AS GDP_growth_percentage
 FROM economies AS e
 JOIN economies AS e2
@@ -29,8 +29,8 @@ FROM v_GDP_payroll_price_growth_comparsion;
 
 CREATE OR REPLACE VIEW v_GDP_payroll_price_growth_comparsion AS
 SELECT 
-	ppgc.year AS 'year', 
 	ppgc.previous_year AS previous_year,
+	ppgc.year AS 'year', 
 	gcc.GDP_growth_percentage,
 	ppgc.payroll_value_growth_percentage,
 	ppgc.food_value_growth_percentage
