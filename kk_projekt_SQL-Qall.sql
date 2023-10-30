@@ -126,10 +126,10 @@ FROM v_payroll_values_changes;
 -- CREATE OR REPLACE VIEW v_payroll_values_changes AS
 SELECT 
 	kkp.industry AS industry,	
-	kkp.payroll_value_year AS 'year', 
-	kkp.avg_payroll_value AS payroll_value,
 	kkp2.payroll_value_year AS previous_year, 
 	kkp2.avg_payroll_value AS previous_payroll_value,
+	kkp.payroll_value_year AS 'year', 
+	kkp.avg_payroll_value AS payroll_value,
 	ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) AS payroll_value_growth_percentage,
 	CASE
         WHEN ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) < 0 THEN 'falling'
@@ -145,10 +145,10 @@ ORDER BY industry, 'year', previous_year;
 -- CREATE OR REPLACE VIEW v_payroll_rising_values AS
 SELECT 
 	kkp.industry AS industry,	
-	kkp.payroll_value_year AS 'year', 
-	kkp.avg_payroll_value,
 	kkp2.payroll_value_year AS previous_year, 
 	kkp2.avg_payroll_value AS previous_payroll_value,
+	kkp.payroll_value_year AS 'year', 
+	kkp.avg_payroll_value,
 	ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) AS payroll_value_growth_percentage,
 	CASE
         WHEN ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) < 0 THEN 'falling'
@@ -169,10 +169,10 @@ ORDER BY industry, 'year', previous_year;
 -- CREATE OR REPLACE VIEW v_payroll_falling_values AS
 SELECT 
 	kkp.industry AS industry,	
-	kkp.payroll_value_year AS 'year', 
-	kkp.avg_payroll_value AS payroll_value,
 	kkp2.payroll_value_year AS previous_year, 
 	kkp2.avg_payroll_value AS previous_payroll_value,
+	kkp.payroll_value_year AS 'year', 
+	kkp.avg_payroll_value AS payroll_value,
 	ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) AS payroll_value_growth_percentage,
 	CASE
         WHEN ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) < 0 THEN 'falling'
@@ -268,12 +268,12 @@ FROM v_payroll_price_growth_comparsion;
 
 -- CREATE OR REPLACE VIEW v_payroll_price_growth_comparsion AS
 SELECT 
-	kkp.payroll_value_year AS 'year', 
-	ROUND(AVG(kkp.avg_payroll_value),2) AS payroll_value,
-	ROUND(AVG(kkp.avg_food_value),2) AS food_value,
 	kkp2.payroll_value_year AS previous_year, 
 	ROUND(AVG(kkp2.avg_payroll_value),2) AS previous_payroll_value,
 	ROUND(AVG(kkp2.avg_food_value),2) AS previous_food_value,
+	kkp.payroll_value_year AS 'year', 
+	ROUND(AVG(kkp.avg_payroll_value),2) AS payroll_value,
+	ROUND(AVG(kkp.avg_food_value),2) AS food_value,
 	ROUND(((AVG(kkp.avg_payroll_value) - AVG(kkp2.avg_payroll_value)) / AVG(kkp2.avg_payroll_value)) * 100, 2) AS payroll_value_growth_percentage,
 	ROUND(((AVG(kkp.avg_food_value) - AVG(kkp2.avg_food_value)) / AVG(kkp2.avg_food_value)) * 100, 2) AS food_value_growth_percentage,
 	ROUND(((AVG(kkp.avg_food_value) - AVG(kkp2.avg_food_value)) / AVG(kkp2.avg_food_value)) * 100, 2) - ROUND(((AVG(kkp.avg_payroll_value) - AVG(kkp2.avg_payroll_value)) / AVG(kkp2.avg_payroll_value)) * 100, 2) AS food_payroll_value_difference
@@ -313,8 +313,8 @@ FROM v_GDP_payroll_price_growth_comparsion;
 
 -- CREATE OR REPLACE VIEW v_GDP_payroll_price_growth_comparsion AS
 SELECT 
-	ppgc.year AS 'year', 
 	ppgc.previous_year AS previous_year,
+	ppgc.year AS 'year', 
 	gcc.GDP_growth_percentage,
 	ppgc.payroll_value_growth_percentage,
 	ppgc.food_value_growth_percentage
