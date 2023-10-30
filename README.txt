@@ -22,9 +22,9 @@ Tento projekt se zaměřuje na analýzu růstu mezd v různých odvětvích a ce
 
 ## Dodatečné informace
 
-Po přečtení zadání projektu jsem si vůbec nevěděla rady, ukázalo se ale, že hledám příliš složité řešení, místo abych se zaměřila hlavně na to, co už znám.
+Po přečtení zadání projektu jsem si vůbec nevěděla rady, co se ode mě očekává za výstupy, ukázalo se ale, že hledám příliš složité řešení, místo abych se zaměřila hlavně na to, co už znám.
 
-V rámci zpracování dat jsem bojovala zejména s dlouhým časem načítáním některých tabulek, občas bohužel způsobeným technickými problémy a použitím DBeaveru na MacOS.
+V rámci zpracování dat jsem bojovala zejména s dlouhým časem načítáním některých tabulek, občas bohužel způsobeným technickými problémy a použitím DBeaveru na MacOS. V mezičase jsem proto používala DBVisualizer, ale nakonec jsem se vrátila k DBeaveru a již se větší potíže neobjevily. Časem chci ale vyzkoušet i další aplikace pro správu databází. Zpočátku pro mě bylo také komplikované zautomatizovat práci s Gitem, jde ale o návyk, bez kterého už si teď práci představit nedokážu.  
 
 Pro usnadnění práce jsem obě své tabulky uložila do databáze _data_academy_2023_09_26_. Zároveň jsem se snažila pro každou tabulku vytvořit views, v některých případech jsem pak tyto pohledy použila pro tvorbu dotazů pro zodpovězení dalších otázek.
 
