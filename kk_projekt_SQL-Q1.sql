@@ -13,11 +13,11 @@ FROM v_payroll_falling_values;
 
 CREATE OR REPLACE VIEW v_payroll_values_changes AS
 SELECT 
-	kkp.industry AS industry,	
-	kkp.payroll_value_year AS 'year', 
-	kkp.avg_payroll_value AS payroll_value,
+	kkp.industry AS industry,
 	kkp2.payroll_value_year AS previous_year, 
 	kkp2.avg_payroll_value AS previous_payroll_value,
+	kkp.payroll_value_year AS 'year', 
+	kkp.avg_payroll_value AS payroll_value,
 	ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) AS payroll_value_growth_percentage,
 	CASE
         WHEN ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) < 0 THEN 'falling'
@@ -34,10 +34,10 @@ ORDER BY industry, 'year', previous_year;
 CREATE OR REPLACE VIEW v_payroll_rising_values AS
 SELECT 
 	kkp.industry AS industry,	
-	kkp.payroll_value_year AS 'year', 
-	kkp.avg_payroll_value,
 	kkp2.payroll_value_year AS previous_year, 
 	kkp2.avg_payroll_value AS previous_payroll_value,
+	kkp.payroll_value_year AS 'year', 
+	kkp.avg_payroll_value,
 	ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) AS payroll_value_growth_percentage,
 	CASE
         WHEN ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) < 0 THEN 'falling'
@@ -59,10 +59,10 @@ ORDER BY industry, 'year', previous_year;
 CREATE OR REPLACE VIEW v_payroll_falling_values AS
 SELECT 
 	kkp.industry AS industry,	
-	kkp.payroll_value_year AS 'year', 
-	kkp.avg_payroll_value AS payroll_value,
 	kkp2.payroll_value_year AS previous_year, 
 	kkp2.avg_payroll_value AS previous_payroll_value,
+	kkp.payroll_value_year AS 'year', 
+	kkp.avg_payroll_value AS payroll_value,
 	ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) AS payroll_value_growth_percentage,
 	CASE
         WHEN ROUND(((kkp.avg_payroll_value - kkp2.avg_payroll_value) / kkp2.avg_payroll_value) * 100, 2) < 0 THEN 'falling'
