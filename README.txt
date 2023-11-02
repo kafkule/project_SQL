@@ -87,6 +87,3 @@ Vliv HDP na mzdy a ceny potravin ukazuje pohled _v_GDP_payroll_price_growth_comp
 - mezi lety 2011 - 2012 a 2016 - 2017 klesalo HDP, a přesto rostly mzdy i ceny potravin, s největší pravděpodobností je důsledkem růstu mezd a cen potravin pravděpodobně zvyšující se inflace
 
 Pro lepší představu jsem vytvořila také graf závislosti výše HDP na výši mezd a cen potravin v meziročním srovnání. Je však třeba říct, že v ekonomice se vyznám velice málo, a tak jsem vliv HDP na výši mezd nebo cenu potravin konzultovala s AI :)
-
-
-![Graf HDP](https://github.com/kafkule/project_SQL/assets/68855214/972cc218-1600-4fdf-8b7b-5a2c215755ac)
