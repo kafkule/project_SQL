@@ -21,10 +21,8 @@ JOIN economies AS e2
 ON e.country = e2.country AND e.year = e2.year + 1
 WHERE e.country = 'Czech Republic' AND e2.country = 'Czech Republic'
 	AND e.GDP IS NOT NULL AND e2.GDP IS NOT NULL
-ORDER BY GDP_year, previous_GDP_year;
-
-SELECT *
-FROM v_GDP_payroll_price_growth_comparsion;
+	AND e.year BETWEEN 2006 AND 2018
+ORDER BY previous_GDP_year, GDP_year;
 
 
 CREATE OR REPLACE VIEW v_GDP_payroll_price_growth_comparsion AS
@@ -37,5 +35,5 @@ SELECT
 FROM v_payroll_price_growth_comparsion AS ppgc
 JOIN v_GDP_CZ_changes AS gcc
 ON ppgc.year = gcc.GDP_year + 1
-GROUP BY 'year', previous_year
-ORDER BY 'year', previous_year;
+GROUP BY previous_year, 'year' 
+ORDER BY previous_year, 'year';
