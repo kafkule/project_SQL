@@ -16,24 +16,24 @@
 
 ## Zadání projektu
 
-Tento projekt se zaměřuje na analýzu růstu mezd v různých odvětvích a cen potravin v průběhu let. Cílem je zjistit, zda mzdy ve všech odvětvích rostou, nebo zda v některých odvětvích klesají. Zaměřujeme se na porovnání cen potravin a množství, které je možné za tyto ceny koupit za průměrnou mzdu v daném roce. Zkoumáme, která kategorie potravin zdražuje nejpomaleji a zároveň kdy byl meziroční nárůst jejich cen výrazně vyšší než růst mezd. Poslední část projektu se zabývá vlivem hodnoty HDP na změny ve mzdách a cenách potravin.
+Tento projekt se zaměřuje na analýzu růstu mezd v různých odvětvích a cen potravin v průběhu let. Cílem je zjistit, zda mzdy ve všech odvětvích rostou, nebo zda v některých odvětvích klesají. Zaměřujeme se na porovnání cen potravin a množství, které je možné za tyto ceny koupit za průměrnou mzdu v daném roce. Zkoumáme, která kategorie potravin zdražuje nejpomaleji a zároveň, kdy byl meziroční nárůst jejich cen výrazně vyšší než růst mezd. Poslední část projektu se zabývá vlivem hodnoty HDP na změny ve mzdách a cenách potravin.
 
 
 
 ## Dodatečné informace
 
-Po přečtení zadání projektu jsem si vůbec nevěděla rady, co se ode mě očekává za výstupy, ukázalo se ale, že hledám příliš složité řešení, místo abych se zaměřila hlavně na to, co už znám.
+Po přečtení zadání projektu jsem nevěděla, co se ode mě očekává za výstupy. Ukázalo se ale, že jsem hledala příliš složité řešení, místo toho, abych se zaměřila na to, co již znám.
 
-V rámci zpracování dat jsem bojovala zejména s dlouhým časem načítáním některých tabulek, občas bohužel způsobeným technickými problémy a použitím DBeaveru na MacOS. V mezičase jsem proto používala DBVisualizer, ale nakonec jsem se vrátila k DBeaveru a již se větší potíže neobjevily. Časem chci ale vyzkoušet i další aplikace pro správu databází. Zpočátku pro mě bylo také komplikované zautomatizovat práci s Gitem, jde ale o návyk, bez kterého už si teď práci představit nedokážu.  
+Během zpracování dat jsem se setkala s dlouhým časem načítání některých tabulek, což bylo občas způsobeno technickými problémy a používáním DBeaveru na MacOS. V mezičase jsem proto přešla k DBVisualizeru, ale nakonec jsem se vrátila k DBeaveru a již se neobjevily žádné větší potíže. Časem si ale přeji vyzkoušet i další aplikace pro správu databází. Zpočátku jsem také měla obtížnosti s automatizací práce v Gitu, ale stala se pro mě nezbytnou součástí práce.
 
-Pro usnadnění práce jsem obě své tabulky uložila do databáze _data_academy_2023_09_26_. Zároveň jsem se snažila pro každou tabulku vytvořit views, v některých případech jsem pak tyto pohledy použila pro tvorbu dotazů pro zodpovězení dalších otázek.
+Pro usnadnění práce jsem uložila obě své tabulky do databáze s názvem "data_academy_2023_09_26". Zároveň jsem se snažila pro každou tabulku vytvořit pohledy. V některých případech jsem tyto pohledy použila k vytvoření dotazů pro zodpovězení dalších otázek.
 
 
 ## Popis dat
 
 ### Primární tabulka
 
-První tabulka _t_katerina_kocianova_project_SQL_primary_final_ je spojením tabulek _czechia_payroll_, která obsahuje informace o mzdách v různých odvětvích za období několika po sobě jdoucích let, a _czechia_price_ s informacemi o cenách vybraných potravin za období několika let. Zároveň jsou k tabulce připojeny také nejrůznější číselníky (kalkulace a hodnoty mezd, odvětví, kategorie potravin apod.).
+První tabulka _t_katerina_kocianova_project_SQL_primary_final_ vznikla spojením tabulek _czechia_payroll_, která obsahuje informace o mzdách v různých odvětvích za období několika po sobě jdoucích let, a _czechia_price_ s informacemi o cenách vybraných potravin za období několika let. Zároveň jsou k tabulce připojeny také nejrůznější číselníky (kalkulace a hodnoty mezd, odvětví, kategorie potravin apod.).
 
 V tabulce jsou zobrazeny sloupce odvětví a jejich kód, hodnoty mezd a ceny potravin za dané roky a názvy potravin. V tabulce jsem se snažila zobrazit pouze ty nejdůležitější sloupce a záznamy, se kterých vychází odpovědi na výzkumné otázky. Většina se dala propojit přes primární klíče, v jednom případě šlo o vnější spojení. Dále bylo třeba data vyfiltrovat tak, abych získala záznamy jen pro průměrnou hrubou mzdou za plný úvazek. Nakonec jsem sloučila záznamy a seřadila tabulku podle názvu odvětví, let a názvu potravin.
 
