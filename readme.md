@@ -1,6 +1,6 @@
 ### ENGETO Projekt z SQL: Data o mzdách a cenách potravin 
 
-### Autor: Kateřina Kocianová
+### Autor: Kateřina Kocianová (Discord: Kateřina Koci - kafkule)
 -----
 
 
