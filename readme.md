@@ -24,7 +24,7 @@ Tento projekt se zaměřuje na analýzu růstu mezd v různých odvětvích a ce
 
 Po přečtení zadání projektu jsem nevěděla, co se ode mě očekává za výstupy. Ukázalo se ale, že jsem hledala příliš složité řešení, místo toho, abych se zaměřila na to, co již znám.
 
-Během zpracování dat jsem se setkala s dlouhým časem načítání některých tabulek, což bylo občas způsobeno technickými problémy a používáním DBeaveru na MacOS. V mezičase jsem proto přešla k DBVisualizeru, ale nakonec jsem se vrátila k DBeaveru a již se neobjevily žádné větší potíže. Časem si ale přeji vyzkoušet i další aplikace pro správu databází. Zpočátku jsem také měla obtížnosti s automatizací práce v Gitu, ale stala se pro mě nezbytnou součástí práce.
+Během zpracování dat jsem se setkala s dlouhým časem načítání některých tabulek, což bylo občas způsobeno technickými problémy a používáním DBeaveru na MacOS. V mezičase jsem proto přešla k DBVisualizeru, ale nakonec jsem se vrátila k DBeaveru a již se neobjevily žádné větší potíže. Časem si ale přeji vyzkoušet i další aplikace pro správu databází. Zpočátku jsem také měla potíže s prací v Gitu, ale nyní už je to pro mě běžná rutina a automatická součást práce.
 
 Pro usnadnění práce jsem uložila obě své tabulky do databáze s názvem "data_academy_2023_09_26". Zároveň jsem se snažila pro každou tabulku vytvořit pohledy. V některých případech jsem tyto pohledy použila k vytvoření dotazů pro zodpovězení dalších otázek.
 
