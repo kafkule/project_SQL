@@ -1,13 +1,5 @@
 -- 5) Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo následujícím roce výraznějším růstem?
 
-
-SELECT *
-FROM v_GDP_CZ_changes;
-
-SELECT *
-FROM v_GDP_payroll_price_growth_comparsion;
-
-
 CREATE OR REPLACE VIEW v_GDP_CZ_changes AS
 SELECT 
 	e.country,

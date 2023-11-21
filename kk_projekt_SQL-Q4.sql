@@ -1,13 +1,5 @@
 -- 4) Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?
 
-
-SELECT *
-FROM v_payroll_price_growth_comparsion;
-
-SELECT *
-FROM v_payroll_price_growth_comparsion2;
-
-
 CREATE OR REPLACE VIEW v_payroll_price_growth_comparsion AS
 SELECT 
 	kkp2.payroll_value_year AS previous_year, 

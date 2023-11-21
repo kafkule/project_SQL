@@ -1,16 +1,5 @@
 -- 1) Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
 
-
-SELECT *
-FROM v_payroll_values_changes;
-
-SELECT *
-FROM v_payroll_rising_values;
-
-SELECT *
-FROM v_payroll_falling_values;
-
-
 CREATE OR REPLACE VIEW v_payroll_values_changes AS
 SELECT 
 	kkp.industry AS industry,

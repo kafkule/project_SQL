@@ -1,13 +1,5 @@
 -- 3) Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší percentuální meziroční nárůst)?
 
-
-SELECT *
-FROM v_food_values_changes;
-
-SELECT *
-FROM v_food_values_changes_rank;
-
-
 CREATE OR REPLACE VIEW v_food_values_changes AS
 SELECT 
 	kkp.food_name AS food,

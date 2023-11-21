@@ -1,13 +1,5 @@
 -- 2) Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
 
-
-SELECT *
-FROM v_purchase;
-
-SELECT *
-FROM v_avg_purchase;
-
-
 CREATE OR REPLACE VIEW v_purchase AS
 SELECT
 	industry,

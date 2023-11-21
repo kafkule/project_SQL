@@ -1,47 +1,3 @@
--- Datové sady, které je možné použít pro získání vhodného datového podkladu
-
--- Primární tabulky:
-
-SELECT *
-FROM czechia_payroll; -- Informace o mzdách v různých odvětvích za několikaleté období. Datová sada pochází z Portálu otevřených dat ČR.
-
-SELECT *
-FROM czechia_payroll_calculation; -- Číselník kalkulací v tabulce mezd.
-
-SELECT *
-FROM czechia_payroll_industry_branch; -- Číselník odvětví v tabulce mezd.
-
-SELECT *
-FROM czechia_payroll_unit; -- Číselník jednotek hodnot v tabulce mezd.
-
-SELECT *
-FROM czechia_payroll_value_type; -- Číselník typů hodnot v tabulce mezd.
-
-SELECT *
-FROM czechia_price; -- Informace o cenách vybraných potravin za několikaleté období. Datová sada pochází z Portálu otevřených dat ČR.
-
-SELECT *
-FROM czechia_price_category; -- Číselník kategorií potravin, které se vyskytují v našem přehledu.
-
-
--- Číselníky sdílených informací o ČR: 
-
-SELECT *
-FROM czechia_region; -- Číselník krajů České republiky dle normy CZ-NUTS 2.
-
-SELECT *
-FROM czechia_district; -- Číselník okresů České republiky dle normy LAU.
-
-
--- Dodatečné tabulky:
-
-SELECT *
-FROM countries; -- Všemožné informace o zemích na světě, například hlavní město, měna, národní jídlo nebo průměrná výška populace.
-
-SELECT *
-FROM economies; -- HDP, GINI, daňová zátěž, atd. pro daný stát a rok.
-
-
 
 /* 
 Úkoly:
@@ -58,14 +14,7 @@ B) Zodpovědět výzkumné otázky:
 
 -- VÝSTUP PROJEKTU - TABULKY
 
-SELECT *
-FROM t_katerina_kocianova_project_SQL_primary_final AS kkp;
-
-SELECT *
-FROM t_katerina_kocianova_project_SQL_secondary_final AS kks;
-	
-
--- CREATE OR REPLACE TABLE `t_katerina_kocianova_project_SQL_primary_final` AS
+CREATE OR REPLACE TABLE `t_katerina_kocianova_project_SQL_primary_final` AS
 SELECT
 	ib.name AS industry,
 	cpay.industry_branch_code,
@@ -88,7 +37,7 @@ GROUP BY industry, payroll_value_year, food_value_year, food_name
 ORDER BY industry ASC, payroll_value_year ASC, food_value_year, food_name ASC;
 
 
--- CREATE OR REPLACE TABLE `t_katerina_kocianova_project_SQL_secondary_final` AS
+CREATE OR REPLACE TABLE `t_katerina_kocianova_project_SQL_secondary_final` AS
 SELECT 
 	c.country,
 	c.capital_city,
@@ -120,10 +69,7 @@ ORDER BY c.country, e.year;
 
 -- 1) Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
 
-SELECT *
-FROM v_payroll_values_changes;
-
--- CREATE OR REPLACE VIEW v_payroll_values_changes AS
+CREATE OR REPLACE VIEW v_payroll_values_changes AS
 SELECT 
 	kkp.industry AS industry,	
 	kkp2.payroll_value_year AS previous_year, 
@@ -142,7 +88,7 @@ ON kkp.payroll_value_year = kkp2.payroll_value_year + 1
 GROUP BY industry, 'year', previous_year
 ORDER BY industry, 'year', previous_year;
 
--- CREATE OR REPLACE VIEW v_payroll_rising_values AS
+CREATE OR REPLACE VIEW v_payroll_rising_values AS
 SELECT 
 	kkp.industry AS industry,	
 	kkp2.payroll_value_year AS previous_year, 
@@ -166,7 +112,7 @@ WHERE
 GROUP BY industry, 'year', previous_year
 ORDER BY industry, 'year', previous_year;
 
--- CREATE OR REPLACE VIEW v_payroll_falling_values AS
+CREATE OR REPLACE VIEW v_payroll_falling_values AS
 SELECT 
 	kkp.industry AS industry,	
 	kkp2.payroll_value_year AS previous_year, 
@@ -193,7 +139,7 @@ ORDER BY industry, 'year', previous_year;
 
 -- 2) Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
 
--- CREATE OR REPLACE VIEW v_purchase AS
+CREATE OR REPLACE VIEW v_purchase AS
 SELECT
 	industry,
 	avg_payroll_value AS payroll_value,
@@ -209,7 +155,7 @@ WHERE (food_name = 'Chléb konzumní kmínový' OR food_name = 'Mléko polotučn
 	AND (payroll_value_year = 2006 OR payroll_value_year = 2018)
 ORDER BY industry, payroll_value_year;
 
--- CREATE OR REPLACE VIEW v_avg_purchase AS
+CREATE OR REPLACE VIEW v_avg_purchase AS
 SELECT
 	payroll_value_year AS 'year',
 	ROUND(AVG(avg_payroll_value),2) AS avg_payroll_value,
@@ -228,10 +174,7 @@ ORDER BY food_name, payroll_value_year;
 
 -- 3) Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší percentuální meziroční nárůst)?
 
-SELECT *
-FROM v_food_values_changes;
-
--- CREATE OR REPLACE VIEW v_food_values_changes AS
+CREATE OR REPLACE VIEW v_food_values_changes AS
 SELECT 
 	kkp.food_name AS food,
 	kkp.avg_food_value AS value,
@@ -246,7 +189,7 @@ GROUP BY food, 'year', previous_year
 ORDER BY food, 'year', previous_year;
 
 
--- CREATE OR REPLACE VIEW v_food_values_changes_rank AS
+CREATE OR REPLACE VIEW v_food_values_changes_rank AS
 SELECT 
 	kkp.food_name,
 	ROUND(AVG(((kkp.avg_food_value - kkp2.avg_food_value) / kkp2.avg_food_value) * 100), 2) AS avg_food_value_growth_percentage
@@ -257,16 +200,10 @@ GROUP BY kkp.food_name
 ORDER BY avg_food_value_growth_percentage
 LIMIT 7;
 
-SELECT *
-FROM v_food_values_changes_rank;
-
 
 -- 4) Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?
 
-SELECT *
-FROM v_payroll_price_growth_comparsion;
-
--- CREATE OR REPLACE VIEW v_payroll_price_growth_comparsion AS
+CREATE OR REPLACE VIEW v_payroll_price_growth_comparsion AS
 SELECT 
 	kkp2.payroll_value_year AS previous_year, 
 	ROUND(AVG(kkp2.avg_payroll_value),2) AS previous_payroll_value,
@@ -289,11 +226,7 @@ ORDER BY 'year', previous_year;
 
 -- 5) Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo následujícím roce výraznějším růstem?
 
-SELECT *
-FROM v_GDP_CZ_changes;
-
-
--- CREATE OR REPLACE VIEW v_GDP_CZ_changes AS
+CREATE OR REPLACE VIEW v_GDP_CZ_changes AS
 SELECT 
 	e.country,
 	e2.year AS previous_GDP_year,
@@ -310,10 +243,7 @@ WHERE e.country = 'Czech Republic' AND e2.country = 'Czech Republic'
 ORDER BY previous_GDP_year, GDP_year;
 
 
-SELECT *
-FROM v_GDP_payroll_price_growth_comparsion;
-
--- CREATE OR REPLACE VIEW v_GDP_payroll_price_growth_comparsion AS
+CREATE OR REPLACE VIEW v_GDP_payroll_price_growth_comparsion AS
 SELECT 
 	ppgc.previous_year AS previous_year,
 	ppgc.year AS 'year', 
