@@ -89,3 +89,17 @@ Vliv HDP na mzdy a ceny potravin ukazuje pohled _v_GDP_payroll_price_growth_comp
 Pro lepší představu jsem vytvořila také graf závislosti výše HDP na výši mezd a cen potravin v meziročním srovnání. Je však třeba říct, že v ekonomice se vyznám velice málo, a tak jsem vliv HDP na výši mezd nebo cenu potravin konzultovala s AI :)
 
 ![Graf HDP](https://github.com/kafkule/project_SQL/blob/main/images/HDP.png)
+
+
+
+## Změny na základě zpětné vazby lektora
+
+- soubor .DS_Store by neměl být součástí repozitáře, nyní veden jako nesledovaný v souboru .gitignore
+- některé skripty obsahovaly dotazy, které nevedly k výsledkům , ty byly odstraněny, aby nezahlcovaly finální scripty
+- některé commit messages by měly být lépe definovány
+
+
+
+## Závěr
+
+Projekt z SQL: Data o mzdách a cenách potravin SPLNĚNO :white_check_mark:
